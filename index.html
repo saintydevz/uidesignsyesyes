@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXIUM | Premium Roblox Server-side</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0A0A0A;
+            --surface: #1A1A1A;
+            --primary: #FFFFFF;
+            --secondary: #888888;
+            --accent: #FFFFFF;
+            --glow: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--primary);
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-color: var(--bg);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background-color: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(12px);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 2.5rem;
+            filter: invert(100%);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn-primary {
+            background-color: var(--surface);
+            color: var(--primary);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 42rem;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--secondary);
+            margin-bottom: 2.5rem;
+            max-width: 36rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        section {
+            padding: 6rem 5%;
+            background-color: rgba(26, 26, 26, 0.6);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 100%);
+            z-index: -1;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 4rem;
+            text-align: center;
+            position: relative;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 4rem;
+            height: 2px;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary);
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+            gap: 2rem;
+            max-width: 72rem;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background-color: rgba(30, 30, 30, 0.7);
+            padding: 2rem;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.03), transparent);
+            transform: rotate(45deg);
+            z-index: -1;
+        }
+
+        .feature-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px) !important;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .feature-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover .feature-icon {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--secondary);
+            font-size: 1rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+            gap: 2rem;
+            max-width: 64rem;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background-color: rgba(30, 30, 30, 0.7);
+            padding: 2.5rem 2rem;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 100%);
+            z-index: -1;
+        }
+
+        .pricing-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .pricing-card.popular {
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -0.75rem;
+            right: 2rem;
+            background-color: var(--primary);
+            color: var(--bg);
+            padding: 0.25rem 1rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+        }
+
+        .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--secondary);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+
+        .pricing-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--secondary);
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px) !important;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .faq-container {
+            max-width: 56rem;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: rgba(30, 30, 30, 0.7);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .faq-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: rgba(30, 30, 30, 0.5);
+        }
+
+        .faq-question:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .faq-question i {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .faq-answer {
+            padding: 0 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--secondary);
+            background-color: rgba(20, 20, 20, 0.5);
+        }
+
+        .faq-answer.active {
+            padding: 0 2rem 2rem;
+            max-height: 30rem;
+        }
+
+        .faq-question.active {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+
+        .steps {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 4rem;
+            max-width: 72rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 16rem;
+            max-width: 20rem;
+            padding: 2rem;
+            background-color: rgba(30, 30, 30, 0.7);
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 100%);
+            z-index: -1;
+        }
+
+        .step.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .step-number {
+            width: 3rem;
+            height: 3rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin: 0 auto 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .step:hover {
+            transform: translateY(-8px) !important;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .step:hover .step-number {
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .step h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .step p {
+            color: var(--secondary);
+            text-align: center;
+        }
+
+        footer {
+            padding: 4rem 5%;
+            background-color: rgba(20, 20, 20, 0.8);
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .copyright {
+            color: var(--secondary);
+            font-size: 0.875rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero {
+                text-align: center;
+                padding-top: 6rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <nav>
+        <div class="logo">
+            <img src="Nexiumlogo.png" alt="Nexium Logo">
+        </div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#faq">FAQ</a>
+            <a href="#how-to-buy">How to Buy</a>
+            <a href="https://discord.gg/yourdiscord" target="_blank" class="btn btn-primary">Join Discord</a>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Premium Roblox Server-side Execution</h1>
+            <p>The most advanced and undetectable server-side solution for Roblox. Experience unparalleled performance with our cutting-edge technology.</p>
+            <div class="hero-buttons">
+                <a href="#pricing" class="btn btn-primary">View Plans</a>
+                <a href="https://discord.gg/yourdiscord" target="_blank" class="btn btn-outline">Join Discord</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="features" id="features">
+        <h2 class="section-title">Why Choose Nexium</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Undetectable</h3>
+                <p>Advanced obfuscation and execution methods ensure complete undetectability by anti-cheat systems.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Lightning Fast</h3>
+                <p>Optimized for performance with minimal latency, providing the smoothest experience possible.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>Powerful API</h3>
+                <p>Comprehensive documentation and powerful API for custom script integration and execution.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <h3>Frequent Updates</h3>
+                <p>Regular updates to ensure compatibility with the latest Roblox changes and new features.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>24/7 Support</h3>
+                <p>Dedicated support team available around the clock to assist with any issues or questions.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-secret"></i>
+                </div>
+                <h3>Privacy Focused</h3>
+                <p>We don't collect or store any personal data. Your privacy and security are our top priority.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="pricing" id="pricing">
+        <h2 class="section-title">Pricing Plans</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Basic</h3>
+                <div class="price">$9.99 <span>/month</span></div>
+                <ul class="pricing-features">
+                    <li>Server-side Execution</li>
+                    <li>Basic Script Library</li>
+                    <li>Standard Support</li>
+                    <li>1 Game Slot</li>
+                    <li>Community Scripts</li>
+                </ul>
+                <a href="https://discord.gg/yourdiscord" target="_blank" class="btn btn-outline" style="width: 100%;">Purchase</a>
+            </div>
+            <div class="pricing-card popular">
+                <div class="popular-badge">Popular</div>
+                <h3>Pro</h3>
+                <div class="price">$19.99 <span>/month</span></div>
+                <ul class="pricing-features">
+                    <li>All Basic Features</li>
+                    <li>Advanced Script Library</li>
+                    <li>Priority Support</li>
+                    <li>3 Game Slots</li>
+                    <li>Custom Script Support</li>
+                    <li>Early Access Features</li>
+                </ul>
+                <a href="https://discord.gg/yourdiscord" target="_blank" class="btn btn-primary" style="width: 100%;">Purchase</a>
+            </div>
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <div class="price">$49.99 <span>/month</span></div>
+                <ul class="pricing-features">
+                    <li>All Pro Features</li>
+                    <li>Premium Script Library</li>
+                    <li>24/7 Dedicated Support</li>
+                    <li>Unlimited Game Slots</li>
+                    <li>Custom Script Development</li>
+                    <li>Private Executor</li>
+                    <li>Team Access</li>
+                </ul>
+                <a href="https://discord.gg/yourdiscord" target="_blank" class="btn btn-outline" style="width: 100%;">Purchase</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="faq" id="faq">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What is server-side execution?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Server-side execution allows scripts to run directly on the game server rather than the client, providing enhanced security and undetectability compared to traditional client-side execution methods. This means your actions are processed on the game's server, making them much harder to detect and prevent.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Is Nexium detectable?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Nexium uses proprietary obfuscation techniques and server-side injection methods that are currently undetectable by all known anti-cheat systems. We continuously update our methods to stay ahead of detection algorithms. Our system has maintained a 100% undetected status since launch.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do I purchase Nexium?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Purchasing Nexium is simple. Join our Discord server using the invite link above, then navigate to the #purchases channel. Click the "Create Ticket" button and our sales team will guide you through the process, help you choose the right plan, and complete your purchase securely.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What payment methods do you accept?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We accept all major payment methods including PayPal, credit/debit cards, Bitcoin (BTC), Ethereum (ETH), and other popular cryptocurrencies. For enterprise customers, we also accept bank transfers. All payments are processed securely through encrypted channels.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Can I get banned for using Nexium?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>While no cheat can guarantee 100% safety, Nexium's server-side approach makes detection extremely unlikely. We've had zero confirmed bans when used as directed. However, obvious abuse (like extreme speed hacking) may draw manual admin attention. We recommend using our features subtly for maximum safety.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Do you offer refunds?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We offer a 3-day satisfaction guarantee. If you're unhappy with Nexium for any reason within the first 3 days of purchase, open a ticket in our Discord and we'll process a full refund. After 3 days, refunds are handled case-by-case for technical issues we can't resolve.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="how-to-buy" id="how-to-buy">
+        <h2 class="section-title">How to Purchase Nexium</h2>
+        <p>Get started with Nexium in just a few simple steps:</p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Join Our Discord</h3>
+                <p>Click any "Join Discord" button on this page to access our official server where all purchases are handled.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Open a Ticket</h3>
+                <p>Navigate to the #purchases channel and click the "Create Ticket" button to start your private conversation.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Select Your Plan</h3>
+                <p>Our staff will help you choose the perfect plan and handle your secure payment processing.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Get Started</h3>
+                <p>Receive your credentials, setup instructions, and start using Nexium within minutes!</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="social-links">
+            <a href="https://discord.gg/yourdiscord" target="_blank"><i class="fab fa-discord"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+        <div class="logo">
+            <img src="Nexiumlogo.png" alt="Nexium Logo" style="height: 2rem;">
+        </div>
+        <p class="copyright">© 2025 Nexium. All rights reserved.</p>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 60,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    }
+                },
+                "opacity": {
+                    "value": 0.3,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 0.5,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 2,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 2,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.1,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": true,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "repulse": {
+                        "distance": 100,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    }
+                }
+            }
+        });
+
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('i');
+                
+                document.querySelectorAll('.faq-item').forEach(faqItem => {
+                    if (faqItem !== item) {
+                        faqItem.querySelector('.faq-answer').classList.remove('active');
+                        faqItem.querySelector('.faq-question').classList.remove('active');
+                        faqItem.querySelector('.faq-question i').classList.remove('fa-chevron-up');
+                        faqItem.querySelector('.faq-question i').classList.add('fa-chevron-down');
+                    }
+                });
+                
+                answer.classList.toggle('active');
+                question.classList.toggle('active');
+                
+                if (answer.classList.contains('active')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.feature-card, .pricing-card, .faq-item, .step');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const animationPoint = windowHeight * 0.8;
+                
+                if (elementPosition < animationPoint) {
+                    element.classList.add('animate');
+                }
+            });
+        }
+
+        animateOnScroll();
+
+        window.addEventListener('scroll', animateOnScroll);
+
+        const heroContent = document.querySelector('.hero-content');
+        heroContent.style.opacity = '0';
+        heroContent.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            heroContent.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+            heroContent.style.opacity = '1';
+            heroContent.style.transform = 'translateY(0)';
+        }, 100);
+
+        const heroButtons = document.querySelector('.hero-buttons');
+        heroButtons.style.opacity = '0';
+        heroButtons.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            heroButtons.style.transition = 'opacity 0.8s ease-out 0.2s, transform 0.8s ease-out 0.2s';
+            heroButtons.style.opacity = '1';
+            heroButtons.style.transform = 'translateY(0)';
+        }, 100);
+    </script>
+</body>
+</html>
